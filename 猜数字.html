@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数字游戏</title>
+    <style>
+        h2 {
+            color: red;
+        }
+        h1 {
+            color: pink;
+        }
+    </style>
+    <script>
+        var target = Math.floor(Math.random() * 100) + 1; // 生成1到100之间的随机数
+        var count = 10;
+        var flag = false;
+
+        function run() {
+            if (flag) {
+                var guess = parseInt(document.getElementById("guess").value);
+                var result = document.getElementById("feedback");
+                var remainingAttempts = document.getElementById("count");
+
+                if (guess > target) {
+                    result.value = "猜的有点大!";
+                } else if (guess < target) {
+                    result.value = "猜的有点小!";
+                } else if (guess === target) {
+                    result.value = "猜对啦！答案是 " + guess;
+                    flag = false;
+                }
+
+                count--;
+                remainingAttempts.value = count;
+            }
+        }
+
+        function startGame() {
+            flag = true;
+        }
+    </script>
+</head>
+<body align="center">
+    <h2>猜数游戏</h2>
+    <strong>请输入一个0-100之间的随机整数：</strong><br><br>
+    <form>
+        <input type="text" id="guess">
+        <input type="button" value="提交" onclick="run()">
+        <input type="button" value="开始" onclick="startGame()"><br>
+        <label>结果：<input type="text" id="feedback"></label><br>
+        <label>当前还可以猜测的次数：<input type="text" value="10" id="count"></label>
+    </form>
+</body>
+</html>
